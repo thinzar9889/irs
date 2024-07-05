@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->foreignId('university_supervisor_id')->constrained();
+            $table->foreignId('university_supervisor_id');
             $table->string('profile')->nullable();
             $table->string('phone');
             $table->string('roll_no');
