@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreignId('intern_id')->nullable()->constrained();
-            $table->foreignId('company_supervisor_id')->nullable()->constrained();
-            $table->foreignId('university_supervisor_id')->nullable()->constrained();
+            $table->foreignId('intern_id')->nullable();
+            $table->foreignId('company_supervisor_id')->nullable();
+            $table->foreignId('university_supervisor_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

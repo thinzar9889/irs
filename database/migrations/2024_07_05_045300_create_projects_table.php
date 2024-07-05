@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->foreignId('intern_id')->constrained();
+            $table->foreignId('intern_id');
             $table->string('leader');
             $table->string('member');
             $table->text('image')->nullable();

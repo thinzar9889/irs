@@ -15,8 +15,8 @@ class CreateEvaluationsTable extends Migration
     {
         Schema::create('evaluations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('intern_id')->constrained();
-            $table->foreignId('company_id')->constrained();
+            $table->foreignId('intern_id');
+            $table->foreignId('company_id');
             $table->string('period');
             $table->string('leaves_day');
             $table->string('contact_supervisor')->nullable();
