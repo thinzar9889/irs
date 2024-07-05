@@ -12,7 +12,7 @@ class Intern extends Model
         'name',
         'email',
         'password',
-        'university_id',
+        'university_supervisor_id',
         'profile',
         'phone',
         'roll_no',
@@ -28,9 +28,9 @@ class Intern extends Model
         'address'
     ];
 
-    public function university()
+    public function universitySupervisor()
     {
-        return $this->belongsTo(University::class);
+        return $this->belongsTo(universitySupervisor::class);
     }
 
     public function internship()

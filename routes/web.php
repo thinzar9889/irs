@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\InternController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\InternshipController;
@@ -90,5 +91,9 @@ Route::group(['middleware' => ['auth']], function () {
     // application
     Route::resource('application', ApplicationController::class);
     Route::post('delete-application', [ApplicationController::class, 'destroy'])->name('delete-application');
+
+    //project
+    Route::resource('projects', ProjectController::class);
+    Route::get('delete-project', [ProjectController::class, 'destory'])->name('delete-project');
 
 });

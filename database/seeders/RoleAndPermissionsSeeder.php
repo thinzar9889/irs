@@ -64,6 +64,11 @@ class RoleAndPermissionsSeeder extends Seeder
             'evaluation-create',
             'evaluation-edit',
             'evaluation-delete',
+            'project-list',
+            'project-show',
+            'project-create',
+            'project-delete',
+            'project-edit'
         ];
 
         $adminPermissions = [
@@ -103,6 +108,11 @@ class RoleAndPermissionsSeeder extends Seeder
             'evaluation-list',
             'evaluation-export',
             'evaluation-show',
+            'project-list',
+            'project-show',
+            'project-create',
+            'project-delete',
+            'project-edit'
         ];
 
         $companySupervisorPermissions = [
