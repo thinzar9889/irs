@@ -11,7 +11,7 @@
                             <div class="card-header">
                                 <h3 class="card-title col-md-11">Create New Intern</h3>
                                 <a href="{{ route('university-supervisors.index') }}">
-                                <button type="button" class="btn btn-outline-warning float-right">Back</button>
+                                <button type="button" class="btn btn-sm btn-outline-warning float-right">Back</button>
                                 </a>
                             </div>
                             <!-- /.card-header -->
@@ -68,14 +68,14 @@
                                         </div>
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="university_id">University <span class="text-danger">*</span></label>
-                                            <select class="form-control select-university @error('university_id') is-invalid @enderror" name="university_id" id="university_id">
+                                            <label for="university_supervisor_id">University Supervisor<span class="text-danger">*</span></label>
+                                            <select class="form-control select-university @error('university_supervisor_id') is-invalid @enderror" name="university_supervisor_id" id="university_supervisor_id">
                                                 <option value="">---</option>
-                                                @foreach($universities as $university)
-                                                    <option value="{{ $university->id }}">{{ $university->name }}</option>
+                                                @foreach($universitySupervisors as $universitySupervisor)
+                                                    <option value="{{ $universitySupervisor->id }}">{{ $universitySupervisor->name }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('university_id')
+                                            @error('university_supervisor_id')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -104,8 +104,8 @@
                                                 <label for="gender">Gender <span class="text-danger">*</span></label>
                                                 <select class="form-control @error('gender') is-invalid @enderror" name="gender" id="gender">
                                                     <option value="">---</option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
                                                 </select>
                                                 @error('gender')
                                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -136,8 +136,8 @@
                                                 <label for="specialization">Specialization <span class="text-danger">*</span></label>
                                                 <select class="form-control @error('specialization') is-invalid @enderror" name="specialization" id="specialization">
                                                     <option value="">---</option>
-                                                    <option value="ct">CT</option>
-                                                    <option value="cs">CS</option>
+                                                    <option value="CT">CT</option>
+                                                    <option value="CS">CS</option>
                                                 </select>
                                                 @error('specialization')
                                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -145,31 +145,31 @@
                                             </div>
                                             </div></div>
                                             <div class="form-group">
-                                                <label for="class_project">Class Project</label>
-                                                <textarea class="form-control" name="class_project" id="class_project" rows="3">{{ old('class_project') }}</textarea>
+                                                <label for="summernote1">Class Project</label>
+                                                <textarea class="form-control" name="class_project" cols="30" rows="10" id="summernote1">{{ old('class_project') }}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                <label for="activity">Activity</label>
-                                                <textarea class="form-control" name="activity" id="activity" rows="3">{{ old('activity') }}</textarea>
+                                                <label for="summernote2">Activity</label>
+                                                <textarea class="form-control" name="activity" cols="30" rows="10" id="summernote2">{{ old('activity') }}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                <label for="skill">Skill</label>
-                                                <textarea class="form-control" name="skill" id="skill" rows="3">{{ old('skill') }}</textarea>
+                                                <label for="summernote3">Skill</label>
+                                                <textarea class="form-control" name="skill" cols="30" rows="10" id="summernote3">{{ old('skill') }}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                <label for="qualification">Qualification</label>
-                                                <textarea class="form-control" name="qualification" id="qualification" rows="3">{{ old('qualification') }}</textarea>
+                                                <label for="summernote4">Qualification</label>
+                                                <textarea class="form-control" name="qualification" cols="30" rows="10" id="summernote4">{{ old('qualification') }}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                <label for="address">Address</label>
-                                                <textarea class="form-control" name="address" id="address" rows="3">{{ old('address') }}</textarea>
+                                                <label for="summernote5">Address</label>
+                                                <textarea class="form-control" name="address" cols="30" rows="10" id="summernote5">{{ old('address') }}</textarea>
                                             </div>
                                         </div></div>
                                     <!-- /.card-body -->
 
                                     <div class=" card-footer form-group">
-                                        <button type="submit" class="btn btn-outline-success">Submit</button>
-                                        <a href="{{ route('interns.index') }}" class="btn btn-outline-danger">Cancel</a>
+                                        <button type="submit" class="btn btn-sm btn-outline-success">Submit</button>
+                                        <a href="{{ route('interns.index') }}" class="btn btn-sm btn-outline-danger">Cancel</a>
                                     </div>
                                 </form>
                             </div>
@@ -206,4 +206,14 @@
 
         });
     </script>
+   
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#summernote1').summernote();
+        $('#summernote2').summernote();
+        $('#summernote3').summernote();
+        $('#summernote4').summernote();
+        $('#summernote5').summernote();
+    });
+</script>
 @endsection

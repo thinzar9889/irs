@@ -44,6 +44,32 @@
                 </li>
             @endcan
             <!-- End Internships -->
+             <!-- Projects -->
+             @can('project-list')
+                <li class="nav-item {{ Request::segment(1) === 'projects' ? 'menu-is-opening menu-open' : '' }}">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>Projects<i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('projects.index') }}" class="nav-link {{ request()->route()->getName() === 'projects.index' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Lists</p>
+                            </a>
+                        </li>
+                        @can('project-create')
+                            <li class="nav-item">
+                                <a href="{{ route('projects.create') }}" class="nav-link {{ request()->route()->getName() === 'projects.create' ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add</p>
+                                </a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
+            <!-- End Projects -->
 
             <!-- Weekly Report -->
             @can('weekly-report-list')

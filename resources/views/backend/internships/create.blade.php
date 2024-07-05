@@ -14,7 +14,7 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Create New Internship</h3>
                                     <a href="{{ route('internships.index') }}">
-                                        <button type="button" class="btn btn-outline-warning float-right">Back</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary float-right">Back</button>
                                     </a>
                                 </div>
                                 <!-- /.card-header -->
@@ -86,21 +86,26 @@
 
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                      
+                                            <div class="mb-3">
+                                                <label for="summernote1">Description</label>
+                                                <textarea name="description" cols="30" rows="10" id="summernote1"
+                                            class="form-control"></textarea>
+                                            </div>
+                                            <!--<div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="description">Description</label>
                                                     <textarea class="form-control" name="description" id="description" rows="3">{{ old('description') }}</textarea>
                                                 </div>
-                                            </div>
-                                        </div>
+                                            </div>-->
+                                        
                                     </div>
                                     <!-- /.card-body -->
                                     <div>
                                         <div class="card-footer">
-                                            <button type="submit" class="btn btn-outline-success">Submit</button>
+                                            <button type="submit" class="btn btn-sm btn-outline-success">Submit</button>
                                             <a href="{{ route('university-supervisors.index') }}"
-                                                class="btn btn-outline-danger">Cancel</a>
+                                            class="btn btn-sm btn-warning">Cancel</a>
                                         </div>
                                     </div>
 
@@ -146,4 +151,12 @@
             });
         });
     </script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#summernote1').summernote();
+    });
+</script>
+
 @endsection
+

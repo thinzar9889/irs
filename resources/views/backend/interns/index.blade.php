@@ -17,7 +17,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Roll No</th>
-                                        <th>University</th>
+                                        <th>University Supervisor</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -59,7 +59,7 @@
                     { data: 'name', name: 'name' },
                     { data: 'email', name: 'email' },
                     { data: 'roll_no', name: 'roll_no' },
-                    { data: 'university_id', name: 'university_id' },
+                    { data: 'university_supervisor_id', name: 'university_supervisor_id' },
                     { data: 'action', name: 'action', orderable: false },
                 ]
             });

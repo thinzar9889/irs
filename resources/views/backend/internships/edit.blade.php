@@ -56,8 +56,8 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <textarea class="form-control" name="description" id="description" rows="3">{{ old('description', $internship->description) }}</textarea>
+                                        <label for="summernote1">Description</label>
+                                        <textarea class="form-control" name="description" id="summernote1" rows="3">{{ old('description', $internship->description) }}</textarea>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -107,5 +107,10 @@
             });
         });
     </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('#summernote1').summernote();
+    });
+</script>
 @endsection
 

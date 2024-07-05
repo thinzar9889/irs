@@ -49,6 +49,7 @@
                     icon: "success"
                 });
             @endif
+           
             $('#internship-datatable').DataTable({
                 responsive: true,
                 processing: true,
@@ -87,7 +88,7 @@
                     },
                 ]
             });
-
+        
             $(document).on('click', '.delete-btn', function(e) {
                 e.preventDefault();
                 let id = $(this).attr('data-id');
@@ -121,4 +122,11 @@
             });
         });
     </script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#summernote1').summernote();
+    });
+</script>
+
 @endsection
