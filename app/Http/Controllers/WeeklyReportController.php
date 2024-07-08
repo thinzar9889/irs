@@ -60,13 +60,13 @@ class WeeklyReportController extends Controller
         $data = $request->validate([
             'week_no' => ['required'],
             'start_date' => ['required'],
-            'end_date' => ['nullable'],
-            'monday_report' => ['nullable'],
-            'tuesday_report' => ['nullable'],
-            'wednesday_report' => ['nullable'],
-            'thursday_report' => ['nullable'],
-            'friday_report' => ['nullable'],
-            'reflection' => ['nullable'],
+            'end_date' => ['required'],
+            'monday_report' => ['required'],
+            'tuesday_report' => ['required'],
+            'wednesday_report' => ['required'],
+            'thursday_report' => ['required'],
+            'friday_report' => ['required'],
+            'reflection' => ['required'],
         ]);
 
         $user = Auth::user();
@@ -119,13 +119,13 @@ class WeeklyReportController extends Controller
         $data = $request->validate([
             'week_no' => ['required'],
             'start_date' => ['required'],
-            'end_date' => ['nullable'],
-            'monday_report' => ['nullable'],
-            'tuesday_report' => ['nullable'],
-            'wednesday_report' => ['nullable'],
-            'thursday_report' => ['nullable'],
-            'friday_report' => ['nullable'],
-            'reflection' => ['nullable'],
+            'end_date' => ['required'],
+            'monday_report' => ['required'],
+            'tuesday_report' => ['required'],
+            'wednesday_report' => ['required'],
+            'thursday_report' => ['required'],
+            'friday_report' => ['required'],
+            'reflection' => ['required'],
         ]);
 
         $weeklyReport->update($data);

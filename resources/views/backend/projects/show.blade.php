@@ -58,7 +58,7 @@
 
                 <div class="mb-3">
                     <h5>Description</h5>
-                    <p class="mb-1">{{$project->description}}</p>
+                    <p class="mb-1">{!!$project->description!!}</p>
                 </div>
 
                 <div class="mb-3">

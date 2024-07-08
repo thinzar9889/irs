@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            //$table->foreignId('intern_id');
-            //$table->foreignId('leader')->constrained('interns');
-            //$table->foreignId('member')->constrained('interns');
-            $table->text('image')->nullable();
-            $table->text('files')->nullable();
+            $table->foreignId('intern_id');
+            $table->foreignId('project_id');
             $table->timestamp('start_date')->nullable();
             $table->timestamp('deadline_date')->nullable();
             $table->enum('priority',['high','middle','low']);
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('tasks');
     }
 };

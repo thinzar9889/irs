@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Intern;
-use App\Models\UniversitySupervisor;
+use App\Models\University;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,8 +27,8 @@ class InternController extends Controller
         if($request->ajax()) {
             $interns = Intern::query();
             return DataTables::of($interns)->addIndexColumn()
-                ->editColumn('university_supervisor_id', function ($data) {
-                    return $data->universitySupervisor ? $data->universitySupervisor->name : '-';
+                ->editColumn('university_id', function ($data) {
+                    return $data->university ? $data->university->name : '-';
                 })
                 ->editColumn('profile', function($data) {
                     $url= asset('storage/interns/'.$data->profile);
@@ -43,8 +43,8 @@ class InternController extends Controller
 
     public function create()
     {
-        $universitySupervisors = UniversitySupervisor::all();
-        return view('backend.interns.create', compact('universitySupervisors'));
+        $universities = University::all();
+        return view('backend.interns.create', compact('universities'));
     }
 
     public function store(Request $request)
@@ -52,10 +52,10 @@ class InternController extends Controller
         $data = $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required'],
-            'roll_no' => ['required'],
+            'password' => ['required','string','min:8'],
+            'roll_no' => ['required','unique:interns,roll_no'],
             'phone' => ['required'],
-            'university_supervisor_id' => ['required'],
+            'university_id' => ['required'],
             'date_of_birth' => ['required'],
             'gender' => ['required'],
             'nrc_no' => ['required'],
@@ -69,7 +69,7 @@ class InternController extends Controller
             'profile' => ['nullable'],
         ],
         [
-            'university_supervisor_id.required' => 'The university field is required.'
+            'university_id.required' => 'The university field is required.'
         ]);
 
         DB::beginTransaction();
@@ -123,9 +123,9 @@ class InternController extends Controller
     public function edit($id)
     {
         $intern = Intern::findOrFail($id);
-        $universitySupervisors = UniversitySupervisor::all();
+        $universities = University::all();
 
-        return view('backend.interns.edit', compact('intern', 'universitySupervisors'));
+        return view('backend.interns.edit', compact('intern', 'universities'));
     }
 
     public function update(Request $request, $id)
@@ -144,9 +144,9 @@ class InternController extends Controller
                 'name' => ['required'],
                 'email' => ['required', 'email', 'unique:users,email,' . $user->id],
                 'password' => ['nullable'],
-                'roll_no' => ['required'],
+                'roll_no' => ['required','unique:interns,roll_no'.$intern->id],
                 'phone' => ['required'],
-                'university_supervisor_id' => ['required'],
+                'university_id' => ['required'],
                 'date_of_birth' => ['required'],
                 'gender' => ['required'],
                 'nrc_no' => ['required'],
@@ -160,7 +160,7 @@ class InternController extends Controller
                 'profile' => ['nullable'],
             ],
             [
-                'university_supervisor_id.required' => 'The university field is required.'
+                'university_id.required' => 'The university field is required.'
             ]);
 
             if ($request->hasFile('profile')) {

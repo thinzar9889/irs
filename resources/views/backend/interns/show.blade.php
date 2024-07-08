@@ -115,7 +115,7 @@
                       <!-- timeline time label -->
                       <div class="time-label">
                         <span class="bg-danger">
-                        University Supervisor
+                        University
                         </span>
                       </div>
                       <!-- /.timeline-label -->
@@ -123,7 +123,7 @@
                       <div>
                       <i class="fas fa-university mr-1"></i>
                         <div class="timeline-item">
-                        <div class="timeline-body">{{ $intern->universitySupervisor->name }}</div>
+                        <div class="timeline-body">{{ $intern->university->name }}</div>
                         </div>
                       </div><br>
                       <!-- END timeline item -->

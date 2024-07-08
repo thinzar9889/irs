@@ -67,14 +67,14 @@
                                     </div></div>
                                     <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="university_supervisor_id">University Supervisor <span class="text-danger">*</span></label>
-                                        <select class="form-control select-university @error('university_supervisor_id') is-invalid @enderror" name="university_supervisor_id" id="university_supervisor_id">
+                                        <label for="university_id">University <span class="text-danger">*</span></label>
+                                        <select class="form-control select-university @error('university_id') is-invalid @enderror" name="university_id" id="university_id">
                                             <option value="">---</option>
-                                            @foreach($universitySupervisors as $universitySupervisor)
-                                                <option value="{{ $universitySupervisor->id }}" {{ $intern->universitySupervisor_id == $universitySupervisor->id ? 'selected' : '' }}>{{ $universitySupervisor->name }}</option>
+                                            @foreach($universities as $university)
+                                                <option value="{{ $university->id }}" {{ $intern->universityr_id == $university->id ? 'selected' : '' }}>{{ $university->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('university_supervisor_id')
+                                        @error('university_id')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
                                     </div></div></div>

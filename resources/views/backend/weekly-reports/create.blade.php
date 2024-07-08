@@ -12,7 +12,7 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Create New Report</h3>
                                     <a href="{{ route('weekly-reports.index') }}">
-                                <button type="button" class="btn btn-outline-warning float-right">Back</button>
+                                <button type="button" class="btn btn-sm btn-outline-warning float-right">Back</button>
                                 </a>
                                 </div>
                                 <!-- /.card-header -->
@@ -61,23 +61,39 @@
 
                                                     <tr class="odd">
                                                         <td><label for="monday_report">Monday</label></td>
-                                                        <td class="col-sm-10 "><textarea class="form-control" name="monday_report" id="monday_report" rows="3">{{ old('monday_report') }}</textarea></td>
+                                                        <td class="col-sm-10 "><textarea class="form-control  @error('monday_report') is-invalid @enderror" name="monday_report" id="monday_report" rows="3">{{ old('monday_report') }}</textarea>
+                                                        @error('monday_report')
+                                                        <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror</td>
                                                     </tr>
                                                     <tr class="odd">
                                                         <td ><label for="tuesday_report">Tuesday</label></td>
-                                                        <td class="col-sm-10 "><textarea class="form-control" name="tuesday_report" id="tuesday_report" rows="3">{{ old('tuesday_report') }}</textarea></td>
+                                                        <td class="col-sm-10 "><textarea class="form-control  @error('tuesday_report') is-invalid @enderror" name="tuesday_report" id="tuesday_report" rows="3">{{ old('tuesday_report') }}</textarea>
+                                                        @error('tuesday_report')
+                                                        <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror</td>
                                                     </tr>
                                                     <tr class="odd">
                                                         <td ><label for="wednesday_report">Wednesday</label></td>
-                                                        <td class="col-sm-10 "><textarea class="form-control" name="wednesday_report" id="wednesday_report" rows="3">{{ old('wednesday_report') }}</textarea></td>
+                                                        <td class="col-sm-10 "><textarea class="form-control  @error('wednesday_report') is-invalid @enderror" name="wednesday_report" id="wednesday_report" rows="3">{{ old('wednesday_report') }}</textarea>
+                                                        @error('wednesday_report')
+                                                        <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror</td>
                                                     </tr>
                                                     <tr class="odd">
                                                         <td ><label for="thursday_report">Thursday</label></td>
-                                                        <td class="col-sm-10 "><textarea class="form-control" name="thursday_report" id="thursday_report" rows="3">{{ old('thursday_report') }}</textarea></td>
+                                                        <td class="col-sm-10 "><textarea class="form-control  @error('thursday_report') is-invalid @enderror" name="thursday_report" id="thursday_report" rows="3">{{ old('thursday_report') }}</textarea>
+                                                        @error('thursday_report')
+                                                       <span class="invalid-feedback">{{ $message }}</span>
+                                                      @enderror</td>
                                                     </tr>
                                                     <tr class="odd">
                                                         <td ><label for="friday_report">Friday</label></td>
-                                                        <td class="col-sm-10 "><textarea class="form-control" name="friday_report" id="friday_report" rows="3">{{ old('friday_report') }}</textarea></td>
+                                                        <td class="col-sm-10 "><textarea class="form-control  @error('friday_report') is-invalid @enderror" name="friday_report" id="friday_report" rows="3">{{ old('friday_report') }}</textarea>
+                                                        @error('friday_report')
+                                                       <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -85,14 +101,17 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="reflection">Reflection</label>
-                                            <textarea class="form-control" name="reflection" id="reflection" rows="4">{{ old('reflection') }}</textarea>
+                                            <textarea class="form-control  @error('reflection') is-invalid @enderror" name="reflection" id="reflection" rows="4">{{ old('reflection') }}</textarea>
+                                            @error('reflection')
+                                            <span class="invalid-feedback">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-outline-success">Submit</button>
-                                        <a href="{{ route('weekly-reports.index') }}" class="btn btn-outline-danger">Cancel</a>
+                                        <button type="submit" class="btn btn-sm btn-outline-success">Submit</button>
+                                        <a href="{{ route('weekly-reports.index') }}" class="btn btn-sm btn-outline-danger">Cancel</a>
                                     </div>
                                 </form>
                             </div>

@@ -12,7 +12,7 @@ class Intern extends Model
         'name',
         'email',
         'password',
-        'university_supervisor_id',
+        'university_id',
         'profile',
         'phone',
         'roll_no',
@@ -28,9 +28,9 @@ class Intern extends Model
         'address'
     ];
 
-    public function universitySupervisor()
+    public function university()
     {
-        return $this->belongsTo(universitySupervisor::class);
+        return $this->belongsTo(University::class);
     }
 
     public function internship()
@@ -38,5 +38,21 @@ class Intern extends Model
         return $this->hasMany(Internship::class);
     }
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+
+    public function profile_img_path(){
+        if($this->profile_img){
+            return asset('storage/interns/' . $this->profile_img);
+        }
+
+        }
 }

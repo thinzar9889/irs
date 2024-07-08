@@ -8,7 +8,7 @@
             <div class="card-header">
                                 <h3 class="card-title">Create New Project</h3>
                                 <a href="{{ route('projects.index') }}">
-                                <button type="button" class="btn btn-outline-warning float-right">Back</button>
+                                <button type="button" class="btn btn-sm btn-outline-warning float-right">Back</button>
                                 </a>
                             </div>
 
@@ -23,7 +23,7 @@
 
             <div class="form-group">
                 <label for="">Description</label>
-                <textarea name="description" class="form-control md-textarea" rows="5"></textarea>
+                <textarea name="description" class="form-control md-textarea" rows="3"></textarea>
             </div>
 
             <div class="form-group">
@@ -60,7 +60,7 @@
 
             <div class="form-group">
                 <label for="members">Member</label>
-                <select name="member[]" id="members" class="form-control select-ninja" multiple>
+                <select name="members" id="members" class="form-control select-ninja" multiple>
                     <option value="">-- Please Choose --</option>
                     @foreach ($interns as $intern)
                     <option value="{{$intern->id}}">{{$intern->name}}</option>
