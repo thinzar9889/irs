@@ -10,7 +10,7 @@
                         <div class="card card-light">
                             <div class="card-header">
                                 <h3 class="card-title col-md-11">Create New Intern</h3>
-                                <a href="{{ route('university-supervisors.index') }}">
+                                <a href="{{ route('interns.index') }}">
                                 <button type="button" class="btn btn-sm btn-outline-warning float-right">Back</button>
                                 </a>
                             </div>
@@ -68,14 +68,14 @@
                                         </div>
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="university_supervisor_id">University Supervisor<span class="text-danger">*</span></label>
-                                            <select class="form-control select-university @error('university_supervisor_id') is-invalid @enderror" name="university_supervisor_id" id="university_supervisor_id">
+                                            <label for="university_id">University<span class="text-danger">*</span></label>
+                                            <select class="form-control select-university @error('university_id') is-invalid @enderror" name="university_id" id="university_id">
                                                 <option value="">---</option>
-                                                @foreach($universitySupervisors as $universitySupervisor)
-                                                    <option value="{{ $universitySupervisor->id }}">{{ $universitySupervisor->name }}</option>
+                                                @foreach($universities as $university)
+                                                    <option value="{{ $university->id }}">{{ $university->name }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('university_supervisor_id')
+                                            @error('university_id')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -146,23 +146,38 @@
                                             </div></div>
                                             <div class="form-group">
                                                 <label for="summernote1">Class Project</label>
-                                                <textarea class="form-control" name="class_project" cols="30" rows="10" id="summernote1">{{ old('class_project') }}</textarea>
+                                                <textarea class="form-control @error('class_project') is-invalid @enderror" name="class_project" cols="30" rows="10" id="summernote1">{{ old('class_project') }}</textarea>
+                                                @error('class_project')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="summernote2">Activity</label>
-                                                <textarea class="form-control" name="activity" cols="30" rows="10" id="summernote2">{{ old('activity') }}</textarea>
+                                                <textarea class="form-control @error('activity') is-invalid @enderror" name="activity" cols="30" rows="10" id="summernote2">{{ old('activity') }}</textarea>
+                                                @error('activity')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="summernote3">Skill</label>
-                                                <textarea class="form-control" name="skill" cols="30" rows="10" id="summernote3">{{ old('skill') }}</textarea>
+                                                <textarea class="form-control @error('skill') is-invalid @enderror" name="skill" cols="30" rows="10" id="summernote3">{{ old('skill') }}</textarea>
+                                                @error('skill')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="summernote4">Qualification</label>
-                                                <textarea class="form-control" name="qualification" cols="30" rows="10" id="summernote4">{{ old('qualification') }}</textarea>
+                                                <textarea class="form-control @error('qualification') is-invalid @enderror" name="qualification" cols="30" rows="10" id="summernote4">{{ old('qualification') }}</textarea>
+                                                @error('qualification')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="summernote5">Address</label>
-                                                <textarea class="form-control" name="address" cols="30" rows="10" id="summernote5">{{ old('address') }}</textarea>
+                                                <textarea class="form-control @error('address') is-invalid @enderror" name="address" cols="30" rows="10" id="summernote5">{{ old('address') }}</textarea>
+                                                @error('address')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div></div>
                                     <!-- /.card-body -->

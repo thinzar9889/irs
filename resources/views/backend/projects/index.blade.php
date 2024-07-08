@@ -1,52 +1,71 @@
 @extends('backend.layouts.app')
 @section('content')
 <div class="wrapper">
-<div class="content-wrapper">
-<div class="card">
-    <div class="card-body">
-        <table class="table table-bordered Datatable" style="width:100%;">
-            <thead>
-                <th class="text-center no-sort no-search"></th>
-                <th class="text-center">Title</th>
-                <th class="text-center">Description</th>
-                <th class="text-center no-sort">Leaders</th>
-                <th class="text-center">Start Date</th>
-                <th class="text-center">Deadline</th>
-                <th class="text-center">Status</th>
-                <th class="text-center no-sort">Action</th>
-                <th class="text-center no-search hidden">Updated at</th>
-            </thead>
-        </table>
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 mt-3">
+                        <div class="card">
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table class="table align-middle mb-0 bg-white" id="project-datatable" style="width:100%">
+                                    <thead class="bg-light">
+                                    <tr>
+                                    <th class="text-center">NO</th>
+                                    <th class="text-center">Title</th>
+                                    <th class="text-center">Description</th>
+                                    <th class="text-center no-sort">Leader</th>
+                                    <th class="text-center">Start Date</th>
+                                    <th class="text-center">Deadline</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center no-sort">Action</th>
+                                    <th class="text-center no-search hidden">Updated at</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+
     </div>
 </div>
-</div></div>
 @endsection
+
+
 @section('script')
-<script>
-    $(document).ready( function () {
+    <script type="text/javascript">
+        $(document).ready( function () {
             @if (session('success'))
                 Swal.fire({
                     title: "{{ session('success') }}",
                     icon: "success"
                 });
             @endif
-            $('#projects-datatable').DataTable({
+            $('#project-datatable').DataTable({
                 responsive: true,
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('projects.index') }}",
                 columns: [
-                    { data: 'plus-icon', name: 'plus-icon', class: 'text-center' },
-                    { data: 'title', name: 'title', class: 'text-center' },
-                    { data: 'description', name: 'description', class: 'text-center' },
-                    { data: 'leaders', name: 'leaders', class: 'text-center' },
-                    { data: 'start_date', name: 'start_date', class: 'text-center' },
-                    { data: 'deadline', name: 'deadline', class: 'text-center' },
-                    { data: 'status', name: 'status', class: 'text-center' },
-                    { data: 'action', name: 'action', class: 'text-center' },
-                    { data: 'updated_at', name: 'updated_at', class: 'text-center' },
-                ],
-                order: [[ 10, "desc" ]],
+                    { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                    { data: 'title', name: 'title'},
+                    { data: 'description', name: 'description'},
+                    { data: 'leaders', name: 'leaders'},
+                    { data: 'start_date', name: 'start_date'},
+                    { data: 'deadline', name: 'deadline'},
+                    { data: 'status', name: 'status'},
+                    { data: 'action', name: 'action',orderable: false },
+                    { data: 'updated_at', name: 'updated_at',orderable: false },
+                ]
             });
 
             $(document).on('click', '.delete-btn', function (e) {
@@ -82,6 +101,6 @@
                 });
             });
         });
-    
-    </script>
+   
+   </script>
 @endsection

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Project;
+use App\Models\ProjectLeader;
+use App\Models\ProjectMember;
 use App\Models\Intern;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +20,7 @@ class ProjectController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:project-list|intern-create|project-show|project-edit|project-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:project-list|project-create|project-show|project-edit|project-delete', ['only' => ['index', 'show']]);
         $this->middleware('permission:project-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:project-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:project-delete', ['only' => ['destroy']]);
@@ -31,7 +33,7 @@ class ProjectController extends Controller
             ->editColumn('description', function ($each) {
                 return Str::limit($each->description, 150);
             })
-            ->addColumn('leader', function ($each) {
+            ->addColumn('leaders', function ($each) {
                 $output = '<div style="width:160px;">';
                foreach ($each->leaders as $leader) {
                     $output .= '<img src="' . $leader->profile_img_path() . '" alt="" class="profile-thumbnail2">';
@@ -39,7 +41,7 @@ class ProjectController extends Controller
 
                 return $output . '</div>';
             })
-            ->addColumn('member', function ($each) {
+            ->addColumn('members', function ($each) {
                 $output = '<div style="width:160px;">';
                 foreach ($each->members as $member) {
                     $output .= '<img src="' . $member->profile_img_path() . '" alt="" class="profile-thumbnail2">';
@@ -81,25 +83,24 @@ class ProjectController extends Controller
 
     public function store(Request $request)
     {
-       //if (!auth()->user()->can('create_project')) {
-        //    abort(403, 'Unauthorized Action');
-        //}
-
+        
+            
         $request->validate([
             'title' => 'required',
             'description' => 'nullable',
-            'leader' => 'required',
-            'member' => 'required',
-            'members' => 'nullable|array',
+            //'intern_id' =>'required',
+            //'leaders' => 'required|exists:interns,id',
+            //'members' => 'required|exists:interns,id',
+            //'member' => 'nullable|array',
             'images' => 'nullable|array',
-            'images.*' => 'image|max:2048',
+            //'images.*' => 'image|max:2048',
             'files' => 'nullable|array',
-            'files.*' => 'file|max:10240',
+            //'files.*' => 'file|max:10240',
             'start_date' => 'nullable|date',
             'deadline_date' => 'nullable|date',
             'priority' => 'required|in:high,middle,low',
             'status' => 'required|in:pending,in_progress,complete',
-            'members' => 'nullable|array',
+           
         ]);
 
         $image_names = null;
@@ -127,6 +128,9 @@ class ProjectController extends Controller
         $project = new Project();
         $project->title = $request->input('title');
         $project->description = $request->input('description');
+        //$project->intern_id = $request->input('intern_id');
+       // $project->leader = $request->input('intern_id');
+        //$project->member = $request->input('intern_id');
         $project->image = $request->input('images'); 
         $project->files = $request->input('files');
         $project->start_date = $request->input('start_date');
@@ -137,7 +141,7 @@ class ProjectController extends Controller
 
         $project->leaders()->sync($request->leaders);
         $project->members()->sync($request->members);
-        $project->members()->sync($request->input('members', []));
+        //$project->members()->sync($request->input('members', []));
 
         return redirect()->route('projects.index')->with('create', 'Project is successfully created.');
     }
@@ -151,7 +155,25 @@ class ProjectController extends Controller
     }
 
     public function update($id, Request $request)
+
     {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'nullable',
+            //'intern_id' =>'required',
+            //'leaders' => 'required|exists:interns,id',
+            //'members' => 'required|exists:interns,id',
+            //'member' => 'nullable|array',
+            'images' => 'nullable|array',
+            //'images.*' => 'image|max:2048',
+            'files' => 'nullable|array',
+            //'files.*' => 'file|max:10240',
+            'start_date' => 'nullable|date',
+            'deadline_date' => 'nullable|date',
+            'priority' => 'required|in:high,middle,low',
+            'status' => 'required|in:pending,in_progress,complete',
+           
+        ]);
         $project = Project::findOrFail($id);
         $image_names = $project->images;
         if ($request->hasFile('images')) {
@@ -159,7 +181,7 @@ class ProjectController extends Controller
             $images_file = $request->file('images');
             foreach ($images_file as $image_file) {
                 $image_name = uniqid() . '_' . time() . '.' . $image_file->getClientOriginalExtension();
-                Storage::disk('public')->put('project/' . $image_name, file_get_contents($image_file));
+                Storage::disk('public')->put('projects/' . $image_name, file_get_contents($image_file));
                 $image_names[] = $image_name;
             }
         }
@@ -170,13 +192,15 @@ class ProjectController extends Controller
             $files = $request->file('files');
             foreach ($files as $file) {
                 $file_name = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
-                Storage::disk('public')->put('project/' . $file_name, file_get_contents($file));
+                Storage::disk('public')->put('projects/' . $file_name, file_get_contents($file));
                 $file_names[] = $file_name;
             }
         }
 
         $project->title = $request->title;
         $project->description = $request->description;
+       // $project->leader = $request->leader;
+        //$project->member = $request->member;
         $project->image = $image_names;
         $project->files = $file_names;
         $project->start_date = $request->start_date;
@@ -202,8 +226,8 @@ class ProjectController extends Controller
        
         $project = Project::findOrFail($id);
 
-        $project->leaders()->detach();
-        $project->members()->detach();
+        $project->interns()->detach();
+   
 
         $project->delete();
 

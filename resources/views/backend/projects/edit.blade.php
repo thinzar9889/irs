@@ -8,7 +8,7 @@
             @method('PUT')
 
             <div class="form-control">
-                <label for="">Title</label>
+                <label for="title">Title</label>
                 <input type="text" name="title" class="form-control" value="{{$project->title}}">
             </div>
 
